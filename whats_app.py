@@ -12,13 +12,17 @@ driver.get("https://web.whatsapp.com/")
 def Sendmsg():
 
     #enter name of receiver
-    name = input("Enter the name of user or group : ")
+    name = input("Enter the name/phone No. of user or name of group : ")
     #enter the message
     msg = input("Enter the message : ")
     #enter the count
     count = int(input("Enter Number of count : "))
 
-    user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+    chat = driver.find_element_by_xpath('//div[@title="New chat"]').click()
+    sleep(2)
+    chat_search = driver.find_element_by_xpath('//label[@class="_2Evw0"]/div/div[2]').send_keys(name)
+    sleep(2)
+    user = driver.find_element_by_xpath('//div[@class="_3Xjbn _1RHZR"]/div/div/div/div[2]')
     user.click()
 
     msg_box = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')
@@ -31,11 +35,15 @@ def Sendmsg():
 #send image or video file function
 def sendimgvid():
     #enter name of receiver
-    name = input("Enter the name of user or group : ")
+    name = input("Enter the name/phone no. of user or name of group : ")
     #enter file path
     filepath = input("Enter the file path (Image,Video) : ")
 
-    user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+    chat = driver.find_element_by_xpath('//div[@title="New chat"]').click()
+    sleep(2)
+    chat_search = driver.find_element_by_xpath('//label[@class="_2Evw0"]/div/div[2]').send_keys(name)
+    sleep(2)
+    user = driver.find_element_by_xpath('//div[@class="_3Xjbn _1RHZR"]/div/div/div/div[2]')
     user.click()
 
     attachment_box = driver.find_element_by_xpath('//div[@title = "Attach"]')
@@ -46,7 +54,7 @@ def sendimgvid():
 
     sleep(3)
 
-    send_button = driver.find_element_by_xpath('//span[@data-icon="send-light"]')
+    send_button = driver.find_element_by_xpath('//span[@data-icon="send"]')
     send_button.click()
 
 #user input
